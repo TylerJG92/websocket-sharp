@@ -46,6 +46,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Linq;
 using System.IO;
 using System.Net.Security;
 using System.Net.Sockets;
@@ -54,6 +55,7 @@ using System.Text;
 using System.Threading;
 using WebSocketSharp.Net;
 using WebSocketSharp.Net.WebSockets;
+using System.Security.Cryptography.X509Certificates;
 
 namespace WebSocketSharp
 {
@@ -2172,12 +2174,25 @@ namespace WebSocketSharp
 
           if (!ext.Contains ("client_no_context_takeover"))
             _logger.Warn ("The server hasn't sent back 'client_no_context_takeover'.");
+          
+          if (!ext.Contains ("server_max_window_bits"))
+            _logger.Info ("The server hasn't sent back 'server_max_window_bits'.");
 
+          
           var method = _compression.ToExtensionString ();
           var invalid =
             ext.SplitHeaderValue (';').Contains (
               t => {
                 t = t.Trim ();
+                if (t.StartsWith("server_max_window_bits=")) {
+                  var bitsSplit = t.Split ('=');
+                  int.TryParse (bitsSplit[1], out var bitsGet);
+                  if (bitsGet >= 8 && bitsGet <= 15) {
+                    var bitsEnd = $"{bitsGet}";
+                    return t != method
+                            && t != $"server_max_window_bits={bitsEnd}";
+                  }
+                }
                 return t != method
                        && t != "server_no_context_takeover"
                        && t != "client_no_context_takeover";
