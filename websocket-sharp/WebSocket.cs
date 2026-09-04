@@ -2184,6 +2184,7 @@ namespace WebSocketSharp
             ext.SplitHeaderValue (';').Contains (
               t => {
                 t = t.Trim ();
+                // Checks if the server has sent back `server_max_window_bits` and if so, checks the bits value is between the documentation's range of 8 and 15
                 if (t.StartsWith("server_max_window_bits=")) {
                   var bitsSplit = t.Split ('=');
                   int.TryParse (bitsSplit[1], out var bitsGet);
