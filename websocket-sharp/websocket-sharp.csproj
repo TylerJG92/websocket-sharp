@@ -5,28 +5,39 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>websocket-sharp.snk</AssemblyOriginatorKeyFile>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\websocket-sharp.xml</DocumentationFile>
-    <Copyright>sta.blockhead</Copyright>
-    <Version>1.0.2</Version>
+    <Copyright>Copyright (c) 2010-2017 sta.blockhead; Copyright (c) 2026 TylerJG92</Copyright>
+    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
     <Company />
-    <Authors>sta</Authors>
-    <Description>websocket-sharp provides the WebSocket protocol client and server.
+    <Authors>sta, TylerJG92</Authors>
+    <Description>websocket-sharp provides a WebSocket protocol client and server.
 
-It supports:
-- RFC 6455
-- WebSocket Client and Server
-- Per-message Compression extension
-- Secure Connection
-- HTTP Authentication (Basic/Digest)
-- Query String, Origin header and Cookies
-- Connecting through the HTTP Proxy server
-- .NET 3.5 or later (includes compatible)</Description>
-    <PackageLicenseUrl>https://github.com/PingmanTools/websocket-sharp/blob/master/LICENSE.txt</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/PingmanTools/websocket-sharp/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/PingmanTools/websocket-sharp/</RepositoryUrl>
+This maintained fork targets:
+- .NET Framework 3.5
+- .NET Framework 4.5
+- .NET Standard 2.0
+
+It includes RFC 7692 permessage-deflate compatibility improvements,
+including support for valid server_max_window_bits negotiation.
+
+Features include:
+- RFC 6455 WebSocket client and server
+- Per-message compression
+- Secure connections
+- HTTP authentication
+- Query strings, Origin headers, and cookies
+- HTTP proxy connections</Description>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/TylerJG92/websocket-sharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/TylerJG92/websocket-sharp</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>websocket</PackageTags>
-    <PackageId>WebSocketSharp-netstandard</PackageId>
+    <PackageId>WebSocketSharp-NetCompression</PackageId>
   </PropertyGroup>
 
+<ItemGroup>
+  <None Include="..\LICENSE.txt" Pack="true" PackagePath="" />
+</ItemGroup>
 
 </Project>
